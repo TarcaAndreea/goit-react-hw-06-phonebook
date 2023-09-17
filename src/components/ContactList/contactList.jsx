@@ -3,7 +3,7 @@ import { ElementList } from 'components/ElementsList/ElementList';
 import '../ContactList/contactList-module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteContact } from 'Redux/ContactSlice';
-import { getFilter, getContacts } from 'Redux/selectors';
+import { getContacts } from 'Redux/selectors';
 export const ContactList = () => {
   const dispatch = useDispatch();
   const contacts = useSelector(getContacts);
