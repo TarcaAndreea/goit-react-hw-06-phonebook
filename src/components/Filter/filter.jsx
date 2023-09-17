@@ -1,13 +1,21 @@
 import React from 'react';
 import '../Filter/filter-module.css';
-export const Filter = ({ onChangeFilter }) => {
+import { useDispatch } from 'react-redux';
+import { setFilter } from 'Redux/FilterSlice';
+export const Filter = () => {
+  const dispatch = useDispatch();
+
+  const handleChange = (e) => {
+    dispatch(setFilter(e.target.value));
+  };
+
   return (
     <label className="filter-label">
       Find contacts by name
       <input
         className="filter-input"
         type="text"
-        onChange={e => onChangeFilter(e.target.value)}
+        onChange={handleChange}
       />
     </label>
   );

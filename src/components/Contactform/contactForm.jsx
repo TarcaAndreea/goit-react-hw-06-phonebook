@@ -1,12 +1,27 @@
 import React, { useState } from 'react';
 import '../Contactform/contactForm-module.css';
-export const ContactForm = ({ onAddContact }) => {
+import { useDispatch, useSelector } from 'react-redux';
+import { addContact } from 'Redux/ContactSlice';
+
+import { nanoid } from '@reduxjs/toolkit';
+export const ContactForm = () => {
+  const dispatch = useDispatch();
+  const contacts = useSelector(state => state.contacts.contacts);
+
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
   const handleSubmit = e => {
     e.preventDefault();
-    onAddContact(name, number);
+
+    const contactExists = contacts.some(contact => contact.name === name);
+
+    if (contactExists) {
+      alert(`${name} already exists in contacts!`);
+      return;
+    }
+
+    dispatch(addContact({ id: nanoid(), name, number }));
     setName('');
     setNumber('');
   };
